@@ -14,9 +14,17 @@ public interface AlfrescoClient {
    *         the id of the last transaction already being indexed; it can be considered a "startFrom" param
    * @return an {@link AlfrescoResponse}
    */
-  AlfrescoResponse fetchNodes(long lastTransactionId, long lastAclChangesetId) throws
+  AlfrescoResponse fetchNodes(long lastTransactionId, long lastAclChangesetId, AlfrescoFilters filters) throws
       AlfrescoDownException;
-
+  
+  /**
+   * Fetches Node Info from Alfresco for a given node.
+   * @param nodeUuid the UUID for the node
+   * @return an {@link AlfrescoResponse}
+   * @throws AlfrescoDownException
+   */
+  AlfrescoResponse fetchNode(String nodeUuid) throws AlfrescoDownException;
+  
   /**
    * Fetches metadata from Alfresco for a given node.
    * @param nodeUuid
@@ -32,6 +40,14 @@ public interface AlfrescoClient {
    */
   AlfrescoUser fetchUserAuthorities(String username) throws AlfrescoDownException;
 
+    /**
+     * Verify the connectivity with Alfresco
+     * @return
+     * @throws AlfrescoDownException
+     */
+    public boolean checkConnection() throws AlfrescoConnectionException;
+
+
   /**
    * Fetches authorities for all users.
    * @return a list of {@link AlfrescoUser}
@@ -45,4 +61,12 @@ public interface AlfrescoClient {
    * @return Document Binary Content
    */
   InputStream fetchContent(String contentUrlPath);
+
+   String getChangesUrl();
+
+   String getActionsUrl();
+
+   String getAuthoritiesUrl();
+
+   String getMetadataUrl();
 }

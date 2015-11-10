@@ -7,8 +7,18 @@
     </#list>
   ],
   "path" : "${path}",
+  "parentRef" : "${parentRef}",
+  <#if mimetype??>
+  	"mimetype" : "${mimetype}",
+  </#if>
+  <#if size??>
+  	"size" : "${size}",
+  </#if>
   <#if shareUrlPath??>
     "shareUrlPath" : "${shareUrlPrefix + shareUrlPath}",
+  </#if>
+  <#if shareParentUrlPath??>
+    "shareParentUrlPath" : "${shareUrlPrefix + shareParentUrlPath}",
   </#if>
   <#if contentUrlPath??>
     "contentUrlPath" : "${contentUrlPrefix + contentUrlPath}",
@@ -16,8 +26,14 @@
   <#if thumbnailUrlPath??>
     "thumbnailUrlPath" : "${thumbnailUrlPrefix + thumbnailUrlPath}",
   </#if>
+  <#if thumbnailBase64??>
+    "thumbnailBase64" : "${thumbnailBase64}",
+  </#if>
   <#if previewUrlPath??>
     "previewUrlPath" : "${previewUrlPrefix + previewUrlPath}",
+  </#if>
+  <#if imgPreviewUrlPath??>
+    "imgPreviewUrlPath" : "${previewUrlPrefix + imgPreviewUrlPath}",
   </#if>
 
   <#assign propNames = properties?keys>

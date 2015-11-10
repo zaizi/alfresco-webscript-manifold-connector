@@ -3,13 +3,12 @@ package org.alfresco.consulting.indexer.webscripts;
 import org.alfresco.query.PagingRequest;
 import org.alfresco.query.PagingResults;
 import org.alfresco.service.cmr.security.AuthorityService;
-import org.alfresco.service.cmr.security.AuthorityType;
 import org.alfresco.service.cmr.security.PersonService;
 import org.alfresco.service.namespace.QName;
 import org.alfresco.util.Pair;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.cxf.common.util.StringUtils;
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.extensions.webscripts.Cache;
 import org.springframework.extensions.webscripts.DeclarativeWebScript;
 import org.springframework.extensions.webscripts.Status;
@@ -27,12 +26,10 @@ import java.util.*;
  * - Using JSON libraries (or StringBuffer), render out the payload without passing through FreeMarker template
  */
 public class AuthorityResolverWebScript extends DeclarativeWebScript {
-
-  protected static final Log logger = LogFactory.getLog(AuthorityResolverWebScript.class);
+  private static final Logger logger = LoggerFactory.getLogger(AuthorityResolverWebScript.class);
 
   @Override
   protected Map<String, Object> executeImpl(WebScriptRequest req, Status status, Cache cache) {
-
     Map<String,Set<String>> authoritiesPerUser = new HashMap<String,Set<String>>();
     Set<String> usersToParse = new HashSet<String>();
 
@@ -41,6 +38,7 @@ public class AuthorityResolverWebScript extends DeclarativeWebScript {
     String username = templateArgs.get("username");
 
     if (StringUtils.isEmpty(username)) {
+      logger.warn( "[Authority Resolution] Username is empty {}",username );
       PagingRequest pagingRequest = new PagingRequest(Integer.MAX_VALUE);
       PagingResults<PersonService.PersonInfo> people =
           this.personService.getPeople(
