@@ -1,5 +1,5 @@
 alfresco-webscript-manifold-connector
-=====================================
+=====================================++
 
 Alfresco WebScripts Solr API Repository Connector for Apache ManifoldCF
 
