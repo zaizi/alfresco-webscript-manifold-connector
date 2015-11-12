@@ -21,7 +21,7 @@
     <properties>
       <alfresco.groupId>org.alfresco</alfresco.groupId>
       <alfresco.version>4.2.f</alfresco.version>
-       <mcf.version>1.8-SNAPSHOT</mcf.version>
+       <mcf.version>1.8.1</mcf.version>
     </properties>
 
     <scm>
